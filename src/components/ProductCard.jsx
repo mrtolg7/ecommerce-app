@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../CartContext";
-
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
+import { Heart } from "lucide-react";
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const {wishlist, toggleWishlist} = useWishlist()
+  const isInWishlist = wishlist[product.id]
 
   return (
     // 1. DOKUNUŞ: h-full ve flex flex-col ekledik.
-    <div key={product.id} className="group bg-white rounded-xl overflow-hidden transition hover:shadow-lg flex flex-col h-full border border-gray-100">
+    <div key={product.id} className=" relative group bg-white rounded-xl overflow-hidden transition hover:shadow-lg flex flex-col h-full border border-gray-100">
 
       <Link to={`/product/${product.id}`} >
       <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden relative p-4 h-50">
@@ -26,6 +29,8 @@ export default function ProductCard({ product }) {
         <p className="mt-4 mb-2 text-lg font-bold text-gray-900">
           ${product.price}
         </p>
+        
+
       </div>
 
       </Link>
@@ -41,6 +46,18 @@ export default function ProductCard({ product }) {
             </svg>
             Sepete Ekle
         </button>
+        <div className="absolute top-3 right-3">
+        <button onClick={() => toggleWishlist(product)}>
+  <Heart
+    className={`transition duration-200 ${
+      isInWishlist
+        ? "text-red-500 fill-red-500"
+        : "text-gray-400 hover:text-red-400"
+    }`}
+  />
+</button>
+        </div>
     </div>
   );
+  
 }

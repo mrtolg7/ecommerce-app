@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getProductsObj } from "../ProductContext";
+import { getProductsObj } from "../context/ProductContext";
 import ProductCard from "../components/ProductCard";
 
 function ProductPages() {

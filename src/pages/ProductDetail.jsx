@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { getProductsObj } from "../ProductContext";
-import {useCart} from "../CartContext"
+import { getProductsObj } from "../context/ProductContext";
+import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
 

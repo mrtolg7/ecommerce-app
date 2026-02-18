@@ -1,10 +1,14 @@
-import { useCart } from "../CartContext";
+import { useState } from "react";
 import { Link, NavLink} from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import {User} from "lucide-react"
 
 export default function Header() {
 
   const { cart } = useCart(); 
 
+  const {currentUser, logout} = useAuth()
 
   const totalItems = Object.values(cart).reduce((acc, item) => acc + Number(item.quantity), 0);
 
@@ -26,7 +30,44 @@ export default function Header() {
         <NavLink to="about">
           About Us
         </NavLink>
-        <NavLink to="/auth">Login</NavLink>
+        
+        {!currentUser ? (
+  <NavLink to="/auth">Login</NavLink>
+) : (
+  <div className="relative group">
+
+    {/* ICON */}
+    <div className="cursor-pointer hover:text-indigo-300 transition">
+      <User />
+    </div>
+
+    {/* DROPDOWN */}
+    <div className="absolute right-0 mt-3 w-52 bg-white text-gray-800 rounded-xl shadow-lg py-2 z-50 
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                    transition-all duration-200">
+
+      <div className="px-4 py-2 text-sm text-gray-500 border-b truncate">
+        {currentUser.email}
+      </div>
+
+      <NavLink
+        to="/wishlist"
+        className="block px-4 py-2 hover:bg-gray-100"
+      >
+        Wishlist
+      </NavLink>
+
+      <button
+        onClick={logout}
+        className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+      >
+        Logout
+      </button>
+
+    </div>
+  </div>
+)}
+
 
         <NavLink to="cart">
         <div className="relative cursor-pointer ml-5">

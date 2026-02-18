@@ -9,6 +9,7 @@ import Blog from "../pages/Blog";
 import Layout from "../components/Layout";
 import ProductDetail from "../pages/ProductDetail";
 import AuthPage from "../pages/AuthPage";
+import WishlistPage from "../pages/WIshlistPage";
 
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
                 <Route path="about" element={<About />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="/auth" element={<AuthPage />} />
-
+                <Route path="wishlist" element={<WishlistPage />} />
             </Route>
         </Routes>
         </BrowserRouter>
