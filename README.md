@@ -132,49 +132,42 @@ Modern e-commerce frontend project built with React.
 
 ## 📂 Project Structure
 
+
+```bash
 src/
-├─ app/
-│ ├─ App.jsx
-│
-├─ components/
-│ ├─ Cart.jsx
-│ ├─ Footer.jsx
-│ ├─ Header.jsx
-│ ├─ Layout.jsx
-│ ├─ ProductCard.jsx
-│
-├─ pages/
-│ ├─ About.jsx
-│ ├─ AuthPage.jsx
-│ ├─ Blog.jsx
-│ ├─ Home.jsx
-│ ├─ Login.jsx
-│ ├─ ProductDetail.jsx
-│ ├─ ProductPages.jsx
-│ ├─ WishlistPage.jsx
-│
-├─ context/
-│ ├─ AuthContext.jsx
-│ ├─ CartContext.jsx
-│ ├─ WishlistContext.jsx
-│ ├─ ProductContext.jsx
-│
-├─ services/
-├─ hooks/
-├─ types/
-├─ main.jsx
-├─ index.css
----
+ ├─ app/
+ │   ├─ App.jsx
+ │
+ ├─ components/
+ │   ├─ Cart.jsx
+ │   ├─ Footer.jsx
+ │   ├─ Header.jsx
+ │   ├─ Layout.jsx
+ │   ├─ ProductCard.jsx
+ │
+ ├─ pages/
+ │   ├─ About.jsx
+ │   ├─ AuthPage.jsx
+ │   ├─ Blog.jsx
+ │   ├─ Home.jsx
+ │   ├─ Login.jsx
+ │   ├─ ProductDetail.jsx
+ │   ├─ ProductPages.jsx
+ │   ├─ WishlistPage.jsx
+ │
+ ├─ context/
+ │   ├─ AuthContext.jsx
+ │   ├─ CartContext.jsx
+ │   ├─ WishlistContext.jsx
+ │   ├─ ProductContext.jsx
+ │
+ ├─ services/
+ ├─ hooks/
+ ├─ types/
+ ├─ main.jsx
+ ├─ index.css
+```
 
-## 🛠 Technologies Used
-
-- React
-- React Router
-- Firebase
-- TailwindCSS
-- Lucide Icons
-
----
 
 ## 📌 What I Practiced
 
