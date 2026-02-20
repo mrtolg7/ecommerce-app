@@ -105,55 +105,47 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ## 📂 Project Structure
 
-```
 src/
 ├─ app/
-│  └─ App.jsx
+│ ├─ App.jsx
 │
 ├─ components/
-│  ├─ Cart.jsx
-│  ├─ Footer.jsx
-│  ├─ Header.jsx
-│  ├─ Layout.jsx
-│  └─ ProductCard.jsx
+│ ├─ Cart.jsx
+│ ├─ Footer.jsx
+│ ├─ Header.jsx
+│ ├─ Layout.jsx
+│ ├─ ProductCard.jsx
 │
 ├─ pages/
-│  ├─ About.jsx
-│  ├─ AuthPage.jsx
-│  ├─ Blog.jsx
-│  ├─ CheckoutPage.jsx
-│  ├─ Home.jsx
-│  ├─ Login.jsx
-│  ├─ ProductDetail.jsx
-│  ├─ ProductPages.jsx
-│  ├─ ProfilePage.jsx
-│  ├─ SearchPage.jsx
-│  └─ WishlistPage.jsx
+│ ├─ About.jsx
+│ ├─ AuthPage.jsx
+│ ├─ Blog.jsx
+│ ├─ Home.jsx
+│ ├─ Login.jsx
+│ ├─ ProductDetail.jsx
+│ ├─ ProductPages.jsx
+│ ├─ WishlistPage.jsx
 │
 ├─ context/
-│  ├─ AuthContext.jsx
-│  ├─ CartContext.jsx
-│  ├─ WishlistContext.jsx
-│  ├─ ProductContext.jsx
-│  └─ ProtectedRoute.jsx
+│ ├─ AuthContext.jsx
+│ ├─ CartContext.jsx
+│ ├─ WishlistContext.jsx
+│ ├─ ProductContext.jsx
 │
 ├─ services/
 ├─ hooks/
 ├─ types/
 ├─ main.jsx
-└─ index.css
-```
-
+├─ index.css
 ---
 
 ## 🛠 Technologies Used
 
 - React
-- React Router v6
-- Firebase Authentication
+- React Router
+- Firebase
 - TailwindCSS
-- Lucide React Icons
-- Vite
+- Lucide Icons
 
 ---
 
@@ -174,10 +166,8 @@ src/
 
 ## 📈 Planned Improvements
 
-- Responsive navbar (hamburger menu for mobile)
-- Order history with Firestore
-- Toast notifications (react-hot-toast)
-- Persist cart & wishlist with localStorage or Firestore
-- Payment integration (Stripe / iyzico)
-- 404 page
-- Dark mode
+- Persist cart & wishlist with localStorage
+- Restrict wishlist to authenticated users
+- Payment integration
+- Performance optimization (React.memo)
+- Feature-based folder structure
