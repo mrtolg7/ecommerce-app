@@ -105,7 +105,6 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ## 📂 Project Structure
 
-```
 src/
 ├─ app/
 │  └─ App.jsx
