@@ -105,38 +105,44 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ## 📂 Project Structure
 
+```
 src/
 ├─ app/
-│ ├─ App.jsx
+│  └─ App.jsx
 │
 ├─ components/
-│ ├─ Cart.jsx
-│ ├─ Footer.jsx
-│ ├─ Header.jsx
-│ ├─ Layout.jsx
-│ ├─ ProductCard.jsx
+│  ├─ Cart.jsx
+│  ├─ Footer.jsx
+│  ├─ Header.jsx
+│  ├─ Layout.jsx
+│  └─ ProductCard.jsx
 │
 ├─ pages/
-│ ├─ About.jsx
-│ ├─ AuthPage.jsx
-│ ├─ Blog.jsx
-│ ├─ Home.jsx
-│ ├─ Login.jsx
-│ ├─ ProductDetail.jsx
-│ ├─ ProductPages.jsx
-│ ├─ WishlistPage.jsx
+│  ├─ About.jsx
+│  ├─ AuthPage.jsx
+│  ├─ Blog.jsx
+│  ├─ CheckoutPage.jsx
+│  ├─ Home.jsx
+│  ├─ Login.jsx
+│  ├─ ProductDetail.jsx
+│  ├─ ProductPages.jsx
+│  ├─ ProfilePage.jsx
+│  ├─ SearchPage.jsx
+│  └─ WishlistPage.jsx
 │
 ├─ context/
-│ ├─ AuthContext.jsx
-│ ├─ CartContext.jsx
-│ ├─ WishlistContext.jsx
-│ ├─ ProductContext.jsx
+│  ├─ AuthContext.jsx
+│  ├─ CartContext.jsx
+│  ├─ WishlistContext.jsx
+│  ├─ ProductContext.jsx
+│  └─ ProtectedRoute.jsx
 │
 ├─ services/
 ├─ hooks/
 ├─ types/
 ├─ main.jsx
-├─ index.css
+└─ index.css
+```
 ---
 
 ## 🛠 Technologies Used
