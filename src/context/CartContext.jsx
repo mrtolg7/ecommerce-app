@@ -52,10 +52,10 @@ export const CartProvider = ({ children }) => {
 
   const increaseQuantity = (id) => {
 
-     setCart((prevCart) => {
+    setCart((prevCart) => {
       const existingItem = prevCart[id];
 
-      if(!existingItem) return prevCart
+      if (!existingItem) return prevCart
 
       if (existingItem) {
         return {
@@ -64,8 +64,8 @@ export const CartProvider = ({ children }) => {
             ...existingItem,
             quantity: existingItem.quantity + 1,
           },
-         };
-      
+        };
+
       }
     })
 
@@ -74,12 +74,16 @@ export const CartProvider = ({ children }) => {
   const decreaseQuantity = (id) => {
     setCart((prevCart) => {
       const existingItem = prevCart[id]
-      if(!existingItem) return prevCart
+      if (!existingItem) return prevCart
 
-      if(existingItem) {
+      if (existingItem) {
+        if(existingItem.quantity === 1) {
+          removeFromCart(id)
+          return prevCart
+        }
         return {
           ...prevCart,
-          [id] : {
+          [id]: {
             ...existingItem,
             quantity: existingItem.quantity - 1
           }
@@ -88,12 +92,19 @@ export const CartProvider = ({ children }) => {
     })
   }
 
+  const clearCart = () => {
+    setCart((prevCart) => {
+      return {}
+    })
+  }
+
   const values = {
     cart,
     addToCart,
     removeFromCart,
     increaseQuantity,
-    decreaseQuantity
+    decreaseQuantity,
+    clearCart
   };
 
   console.log("🛒 Sepet Güncellendi:", cart);

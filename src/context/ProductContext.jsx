@@ -14,9 +14,14 @@ export const ProductProvider = ({children}) => {
         })
     }, [])
 
+    const searchProducts = (searchTerm) => {
+        return products.filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    }
+
     const values = {
         products,
-        isLoading
+        isLoading,
+        searchProducts
     }
 
     return(

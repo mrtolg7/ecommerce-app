@@ -32,8 +32,15 @@ export const WishProvider = ({children}) => {
 
 
     }
+
+    const clearWishlist = () => {
+        setWishlist((prevList) => {
+            return {}
+        })
+    }
+
       return (
-    <WishContext.Provider value={{ wishlist, toggleWishlist }}>
+    <WishContext.Provider value={{ wishlist, toggleWishlist, clearWishlist }}>
       {children}
     </WishContext.Provider>
   );

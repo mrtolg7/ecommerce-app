@@ -1,2 +1,8 @@
 @import "tailwindcss";
 
+.checkoutForm > input {
+    width: 20rem;
+    height: 2rem;
+    padding: .5em;
+    margin: .5em;
+}

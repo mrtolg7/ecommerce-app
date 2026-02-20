@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 
 const AuthPage = () => {
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState(false);
+  const [name,setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +19,8 @@ const AuthPage = () => {
       if (isLogin) {
         await login(email, password);
       } else {
-        await register(email, password);
+        const userCredential = await register(email, password)
+        await updateProfile(userCredential.user, {displayName: name})
       }
 
       navigate("/");
@@ -36,6 +39,16 @@ const AuthPage = () => {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {!isLogin && (
+            <input
+              type="text"
+              placeholder="Name"
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
+              onChange={(e) => setName(e.target.value)}
+            />
+          )}
 
           <input
             type="email"

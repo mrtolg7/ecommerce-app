@@ -1,11 +1,28 @@
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate} from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Cart() {
   const { cart, removeFromCart,increaseQuantity,decreaseQuantity } = useCart(); // removeFromCart'ı da çekiyoruz
   const items = Object.values(cart);
   console.log(cart)
+  const {currentUser} = useAuth()
+  const navigate = useNavigate()
   const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   console.log(items)
+
+  const handleCheckout = () => {
+  if (!currentUser) {
+    navigate("/auth", {
+      state: { from: "/checkout" }
+    });
+  } else {
+    navigate("/checkout");
+  }
+};
+
+  
   if (items.length === 0) return (<div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10"><h1 className="text-center font-bold text-indigo-950 text-4xl">Sepetinize ürün ekleyiniz</h1></div>); // Sepet boşsa hiç gözükmesin
 
   return (
@@ -75,9 +92,10 @@ export default function Cart() {
               <p className="text-gray-500 text-sm">Toplam Tutar</p>
               <p className="text-4xl font-extrabold text-gray-900">${totalPrice.toFixed(2)}</p>
             </div>
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg shadow-indigo-200 active:scale-95">
+            <button type="button" onClick={handleCheckout} className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg shadow-indigo-200 active:scale-95">
               Ödemeye Geç
             </button>
+            
           </div>
         </div>
       </div>

@@ -1,32 +1,30 @@
-import { createContext, useContext, useEffect,useState } from "react";
-
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
 
-import{
+import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
 } from "firebase/auth"
-import { log } from "firebase/firestore/pipelines";
+
 
 const AuthContext = createContext()
-
 export const useAuth = () => {
     return useContext(AuthContext)
 }
 
-export const AuthProvider = ({children}) => {
-    const [currentUser,setCurrentUser] = useState(null)
+export const AuthProvider = ({ children }) => {
+    const [currentUser, setCurrentUser] = useState(null)
 
-    const [loading,setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
-    const register = (email,password) => {
+    const register = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login = (email, password) => {
-        return signInWithEmailAndPassword(auth,email,password)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logout = () => {
@@ -40,7 +38,7 @@ export const AuthProvider = ({children}) => {
         })
 
         return unsubscribe
-    },[])
+    }, [])
 
     const value = {
         currentUser,
@@ -51,7 +49,7 @@ export const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={value}>
-        {!loading && children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }
