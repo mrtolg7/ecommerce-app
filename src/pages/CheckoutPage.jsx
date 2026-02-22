@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { db } from "../services/firebase";
+import { useAuth } from "../context/AuthContext";
+import { collection, addDoc } from "firebase/firestore";
+
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
-
+ const {currentUser} = useAuth();
   const cartItems = Object.values(cart);
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -43,7 +47,7 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -63,11 +67,17 @@ export default function CheckoutPage() {
 
     setError("");
     setLoading(true);
-
-    setTimeout(() => {
+    await addDoc(collection(db, "orders"),{
+        userId: currentUser.uid,
+        items: cartItems,
+        total: total,
+        date: new Date().toISOString(),
+        status: "completed",
+        shippingAddress: form,
+      })
       clearCart();
       navigate("/success");
-    }, 1500);
+
   };
 
   return (

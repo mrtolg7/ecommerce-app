@@ -12,11 +12,11 @@ export default function ProductCard({ product }) {
     <div key={product.id} className=" relative group bg-white rounded-xl overflow-hidden transition hover:shadow-lg flex flex-col h-full border border-gray-100">
 
       <Link to={`/product/${product.id}`} >
-      <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden relative p-4 h-50">
+      <div className="h-64 bg-gray-100 flex items-center justify-center overflow-hidden relative p-4">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-contain transition duration-300 group-hover:scale-105"
+          className="w-full h-full object-contain transition duration-300 group-hover:scale-105 mx-auto"
         />
       </div>
 

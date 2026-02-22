@@ -30,7 +30,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="w-full flex items-center justify-center bg-gray-50">
 
       <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
 

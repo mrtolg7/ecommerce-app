@@ -23,7 +23,7 @@ export default function Cart() {
 };
 
   
-  if (items.length === 0) return (<div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10"><h1 className="text-center font-bold text-indigo-950 text-4xl">Sepetinize ürün ekleyiniz</h1></div>); // Sepet boşsa hiç gözükmesin
+  if (items.length === 0) return (<div className=" flex items-center justify-center bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 p-8"><h1 className="font-bold text-indigo-950 text-4xl">Sepete ürün ekleyiniz!</h1></div>); // Sepet boşsa hiç gözükmesin
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10">
@@ -37,9 +37,9 @@ export default function Cart() {
 
         <div className="space-y-6">
           {items.map((item) => (
-            <div key={item.id} className="flex items-center gap-6 p-4 rounded-2xl hover:bg-gray-50 transition-colors group">
+            <div key={item.id} className="flex sm:flex-row flex-col items-center gap-6 p-4 rounded-2xl hover:bg-gray-50 transition-colors group">
               {/* Ürün Resmi */}
-              <div className="w-24 h-24 bg-gray-100 rounded-xl flex-shrink-0 p-2">
+              <div className="w-full sm:w-24 h-32 sm:h-24 bg-gray-100 rounded-xl flex-shrink-0 p-2">
                 <img src={item.image} alt={item.title} className="w-full h-full object-contain mix-blend-multiply" />
               </div>
 
@@ -58,7 +58,7 @@ export default function Cart() {
               </div>
 
               {/* Fiyat ve Silme */}
-              <div className="text-right flex flex-col items-center gap-3">
+              <div className="text-right flex items-center gap-3 w-full sm:W-auto flex-row sm:flex-col justify-between sm:items-end ">
                 <span className="text-xl font-bold text-gray-900">
                   ${(item.price * item.quantity).toFixed(2)}
                 </span>
@@ -73,7 +73,7 @@ export default function Cart() {
             </div>
                 <button 
                   onClick={() => removeFromCart(item.id)}
-                  className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-all opacity-0 group-hover:opacity-100"
+                  className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-all opacity-0 group-hover:opacity-100 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
                   title="Ürünü Kaldır"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -87,7 +87,7 @@ export default function Cart() {
 
         {/* Alt Toplam ve Ödeme Alanı */}
         <div className="mt-10 pt-8 border-t border-gray-100">
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items-end flex-col sm:flex-row gap-4">
             <div>
               <p className="text-gray-500 text-sm">Toplam Tutar</p>
               <p className="text-4xl font-extrabold text-gray-900">${totalPrice.toFixed(2)}</p>

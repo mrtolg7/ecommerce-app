@@ -35,7 +35,8 @@ Modern e-commerce frontend project built with React & Firebase.
 - Display name support on registration (`updateProfile`)
 - Global auth state using AuthContext
 - Conditional navbar UI (Login link → User icon dropdown)
-- Hover dropdown menu (Profile, Wishlist, Logout)
+- Click-based dropdown menu (Profile, Wishlist, Order History, Logout)
+- Responsive hamburger menu for mobile/tablet
 - Protected routes for Checkout, Wishlist & Profile pages
 - Proper logout flow: clears cart & wishlist, navigates to home
 
@@ -71,16 +72,35 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ---
 
-### � Checkout
+### 💳 Checkout
 
-- Checkout page with order summary (protected route)
+- Checkout page with order form & summary (protected route)
+- Saves order to Firestore on completion (`addDoc`)
+- Navigates to success page after checkout
+
+---
+
+### 📦 Order History
+
+- Fetches user's past orders from Firestore (`getDocs`, `query`, `where`)
+- Displays each order with date, status badge, total, and item list
+- Loading spinner and empty state
+- Responsive layout
+
+---
+
+### ✅ Success Page
+
+- Order confirmation page after successful checkout
+- Links to Order History and continue shopping
 
 ---
 
 ## 🎨 UI / UX
 
 - Built with TailwindCSS
-- Sticky navbar
+- Fully responsive (mobile hamburger menu, adaptive layouts)
+- Sticky navbar with click-based user dropdown
 - Animated icons (hover & active states)
 - Clean product card layout with wishlist heart icon
 - Loading spinner animation
@@ -99,12 +119,14 @@ Modern e-commerce frontend project built with React & Firebase.
   - `WishlistContext` — toggle + clearWishlist
   - `ProductContext` — products, loading state, searchProducts
 - Firebase Authentication (`signIn`, `signOut`, `updateProfile`, `updatePassword`, `reauthenticateWithCredential`)
+- Cloud Firestore (`addDoc`, `getDocs`, `query`, `where`, `collection`)
 - Immutable state updates (object-based state)
 
 ---
 
 ## 📂 Project Structure
 
+```
 src/
 ├─ app/
 │  └─ App.jsx
@@ -123,10 +145,12 @@ src/
 │  ├─ CheckoutPage.jsx
 │  ├─ Home.jsx
 │  ├─ Login.jsx
+│  ├─ OrderHistoryPage.jsx
 │  ├─ ProductDetail.jsx
 │  ├─ ProductPages.jsx
 │  ├─ ProfilePage.jsx
 │  ├─ SearchPage.jsx
+│  ├─ successPage.jsx
 │  └─ WishlistPage.jsx
 │
 ├─ context/
@@ -137,6 +161,7 @@ src/
 │  └─ ProtectedRoute.jsx
 │
 ├─ services/
+│  └─ firebase.jsx
 ├─ hooks/
 ├─ types/
 ├─ main.jsx
@@ -147,10 +172,12 @@ src/
 ## 🛠 Technologies Used
 
 - React
-- React Router
-- Firebase
+- React Router v6
+- Firebase Authentication
+- Cloud Firestore
 - TailwindCSS
-- Lucide Icons
+- Lucide React Icons
+- Vite
 
 ---
 
@@ -161,9 +188,10 @@ src/
 - Toggle logic design
 - Protected routes with `Navigate`
 - Firebase Auth flows (register, login, logout, updateProfile, updatePassword, reauthenticate)
+- Firestore CRUD (addDoc, getDocs, query, where)
 - Dynamic filtering with `useMemo` and `Set`
 - URL-based search with `useSearchParams`
-- Conditional rendering & responsive UI
+- Responsive design with breakpoint-based classes
 - Component-based structure
 - Async/await error handling
 
@@ -171,8 +199,9 @@ src/
 
 ## 📈 Planned Improvements
 
-- Persist cart & wishlist with localStorage
-- Restrict wishlist to authenticated users
-- Payment integration
+- Persist cart & wishlist with localStorage or Firestore
+- Toast notifications (react-hot-toast)
+- Payment integration (Stripe / iyzico)
+- 404 page
+- Dark mode
 - Performance optimization (React.memo)
-- Feature-based folder structure

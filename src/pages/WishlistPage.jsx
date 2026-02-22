@@ -5,7 +5,7 @@ export default function WishlistPage() {
     const {addToCart} = useCart()
     const wishlistItems = Object.values(wishlist)
   
-    if (wishlistItems.length === 0) return (<div className="w-3x1 h-20 bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 flex items-center justify-center"><h1 className="text-center font-bold text-indigo-950 text-4xl">İstek listeniz boş!</h1></div>); // Sepet boşsa hiç gözükmesin
+    if (wishlistItems.length === 0) return (<div className="flex items-center justify-center bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 p-8"><h1 className="text-center font-bold text-indigo-950 text-4xl">İstek listeniz boş!</h1></div>);
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10">
@@ -19,9 +19,9 @@ export default function WishlistPage() {
 
         <div className="space-y-6">
           {wishlistItems.map((wishItems) => (
-            <div key={wishItems.id} className="flex items-center gap-6 p-4 rounded-2xl hover:bg-gray-50 transition-colors group">
+            <div key={wishItems.id} className="flex items-center gap-6 p-4 flex-col sm:flex-row rounded-2xl hover:bg-gray-50 transition-colors group">
               {/* Ürün Resmi */}
-              <div className="w-24 h-24 bg-gray-100 rounded-xl flex-shrink-0 p-2">
+              <div className="w-full sm:w-24 h-32 sm:h-24  bg-gray-100 rounded-xl flex-shrink-0 p-2">
                 <img src={wishItems.image} alt={wishItems.title} className="w-full h-full object-contain mix-blend-multiply" />
               </div>
 
@@ -33,7 +33,7 @@ export default function WishlistPage() {
               <div>
               <button 
             onClick={() => addToCart({ ...wishItems, quantity: 1 })}
-            className="mt-auto w-40 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 active:scale-95 shadow-md hover:shadow-indigo-200 pt-4 cursor-pointer"
+            className="mt-auto w-full sm:w-40 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 active:scale-95 shadow-md hover:shadow-indigo-200 pt-4 cursor-pointer"
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>

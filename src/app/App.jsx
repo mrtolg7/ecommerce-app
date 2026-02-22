@@ -9,11 +9,13 @@ import Blog from "../pages/Blog";
 import Layout from "../components/Layout";
 import ProductDetail from "../pages/ProductDetail";
 import AuthPage from "../pages/AuthPage";
-import WishlistPage from "../pages/WIshlistPage";
+import WishlistPage from "../pages/WishlistPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import ProtectedRoute from "../context/ProtectedRoute";
 import SearchPage from "../pages/SearchPage";
 import ProfilePage from "../pages/ProfilePage";
+import OrderHistoryPage from "../pages/OrderHistoryPage";
+import SuccessPage from "../pages/successPage"
 
 export default function App() {
 
@@ -33,6 +35,8 @@ export default function App() {
                         <Route path="checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
                         <Route path="search" element={<SearchPage />} />
                         <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                        <Route path="order-history" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
+                        <Route path="success" element={<ProtectedRoute><SuccessPage /></ProtectedRoute>} />
                     </Route>
                 </Routes>
             </BrowserRouter>
