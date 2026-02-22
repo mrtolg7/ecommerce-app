@@ -123,7 +123,7 @@ Modern e-commerce frontend project built with React & Firebase.
 - Immutable state updates (object-based state)
 
 ---
-
+```
 ## 📂 Project Structure
 
 src/
@@ -178,7 +178,6 @@ src/
 - Lucide React Icons
 - Vite
 
----
 
 ## 📌 What I Practiced
 
