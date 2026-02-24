@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
-
+import toast from "react-hot-toast";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -20,14 +20,17 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     const register = (email, password) => {
+        toast.success("Kayıt olundu!")
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login = (email, password) => {
+        toast.success("Giriş yapıldı!")
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logout = () => {
+        toast.success("Çıkış yapıldı!")
         return signOut(auth)
     }
 

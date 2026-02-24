@@ -1,4 +1,5 @@
 import { useContext, createContext, useState } from "react";
+import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
@@ -25,7 +26,7 @@ export const CartProvider = ({ children }) => {
           },
         };
       }
-
+      
       // 🎯 Cart item formatını biz belirliyoruz
       return {
         ...prevCart,
@@ -34,10 +35,11 @@ export const CartProvider = ({ children }) => {
           title: product.title,
           price: product.price,
           image: product.image,
-          quantity: product.quantity,
+          quantity: qty,
         },
       };
     });
+    toast.success("Ürün sepete eklendi!");
   };
 
   const removeFromCart = (productId) => {
@@ -48,6 +50,7 @@ export const CartProvider = ({ children }) => {
       delete newCart[id];
       return newCart;
     });
+    toast.success("Ürün sepetten kaldırıldı!");
   };
 
   const increaseQuantity = (id) => {

@@ -1,5 +1,5 @@
 import { useContext, createContext,useEffect,useState } from "react";
-
+import toast from "react-hot-toast";
 const WishContext = createContext()
 
 export const WishProvider = ({children}) => {
@@ -10,13 +10,15 @@ export const WishProvider = ({children}) => {
         
         
         const id = product.id
+        const isRemoving = !!wishlist[id]
         setWishlist((prevList) => {
             const existingWish = prevList[id]
-
+        
             if(existingWish) {
                 const updated = {...prevList}
                 delete updated[id]
                 return updated
+                
             }
 
             return {
@@ -29,8 +31,11 @@ export const WishProvider = ({children}) => {
                 }
             }
         })
-
-
+        if(isRemoving) {
+            toast.success("İstek listenizden kaldırıldı!")
+        } else {
+            toast.success("İstek listenize eklendi!")
+        }
     }
 
     const clearWishlist = () => {

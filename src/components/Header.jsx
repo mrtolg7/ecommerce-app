@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { User, Menu, X } from "lucide-react"
+import { User, Menu, X, Sun, Moon } from "lucide-react"
 
 export default function Header() {
 
@@ -14,6 +14,10 @@ export default function Header() {
   const { clearWishlist } = useWishlist()
 
   const navigate = useNavigate()
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem("dark-mode")
+    return saved === "true"
+  })
 
   const handleLogout = async () => {
     await logout()
@@ -25,13 +29,29 @@ export default function Header() {
   const closeMenu = () => {
     setMenuOpen(false)
   }
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
+    localStorage.setItem("dark-mode", darkMode)
+  }, [darkMode])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
+
+  
+
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const totalItems = Object.values(cart).reduce((acc, item) => acc + Number(item.quantity), 0);
 
   return (
-    <header className="w-full bg-indigo-900 border-b border-gray-200 sticky top-0 z-50">
+    <header className="w-full bg-indigo-900 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center max-md:justify-between max-xl:justify-between justify-between">
 
         <Link to="/" className="text-2xl font-bold tracking-tighter text-white">
@@ -66,13 +86,13 @@ export default function Header() {
 
               {/* DROPDOWN */}
               {isDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-52 bg-white text-gray-800 rounded-xl shadow-lg py-2 z-[60]">
+                <div className="absolute right-0 top-full mt-2 w-52 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-xl shadow-lg py-2 z-[60]">
                   <div className="px-4 py-2 text-sm text-gray-500 border-b truncate">
                     {currentUser.email}
                   </div>
                   <NavLink
                     to="/profile"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={() => setDropdownOpen(false)}
                   >
                     Profile
@@ -80,14 +100,14 @@ export default function Header() {
 
                   <NavLink
                     to="/wishlist"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={() => setDropdownOpen(false)}
                   >
                     Wishlist
-                  </NavLink> 
+                  </NavLink>
                   <NavLink
                     to="/order-history"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700" 
                     onClick={() => setDropdownOpen(false)}
                   >
                     Order History
@@ -123,6 +143,9 @@ export default function Header() {
               )}
             </div>
           </NavLink>
+          <button onClick={toggleDarkMode} className="text-white mr-0">
+            {darkMode ? <Sun /> : <Moon />}
+          </button>
           <button onClick={() => setMenuOpen(!isMenuOpen)} className="xl:hidden text-white mr-0">
             {isMenuOpen ? <X /> : <Menu />}
           </button>
@@ -130,7 +153,7 @@ export default function Header() {
 
       </div>
 
-      <div className={`xl:hidden bg-indigo-900 text-white overflow-hidden transition-all duration-350 md:flex md:flex-col md:items-center
+      <div className={`xl:hidden bg-indigo-900 dark:bg-gray-950 text-white overflow-hidden transition-all duration-350 md:flex md:flex-col md:items-center
   ${isMenuOpen ? "max-h-96 opacity-100 py-4" : "max-h-0 opacity-0 py-0"}`}>
         <NavLink to="/" className="block px-4 py-2 hover:bg-indigo-800" onClick={closeMenu}>
           Products

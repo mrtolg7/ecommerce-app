@@ -52,7 +52,7 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ---
 
-### � Search
+### 🔍 Search
 
 - Search bar in header with navigation to `/search?q=...`
 - Search results page using `useSearchParams`
@@ -69,6 +69,26 @@ Modern e-commerce frontend project built with React & Firebase.
 - "Clear All Filters" functionality
 - Product count display ("Showing X of Y products")
 - Empty state with icon when no products match
+
+---
+
+### 🔽 Product Sorting
+
+- Sort by price (low to high / high to low)
+- Sort by rating (low to high / high to low)
+- Default sorting option
+- Sidebar dropdown UI matching filter card design
+- Immutable sorting with spread operator (`[...array].sort()`)
+
+---
+
+### 📄 Pagination
+
+- Client-side pagination with configurable products per page
+- Previous / Next navigation buttons with boundary protection
+- Numbered page buttons with active state indicator
+- Fixed pagination position at bottom of grid (`min-h` + `mt-auto`)
+- Automatic page count based on filtered/sorted product count
 
 ---
 
@@ -96,16 +116,48 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ---
 
+### 🔔 Toast Notifications
+
+- `react-hot-toast` integration
+- Cart actions: add / remove feedback
+- Wishlist actions: add / remove feedback
+- Auth actions: register, login, logout feedback
+- Order completion & profile update feedback
+
+---
+
+### 🚫 404 Page
+
+- Custom "Not Found" page for invalid routes
+- Catch-all route (`path="*"`) in App.jsx
+- Link back to homepage
+
+---
+
+### 🌙 Dark Mode
+
+- Class-based dark mode toggle with Tailwind CSS v4 (`@custom-variant`)
+- Sun/Moon icon toggle button in header
+- `localStorage` persistence — remembers user preference across sessions
+- Global dark mode styles via CSS (`index.css`) for consistent theming
+- Per-component `dark:` overrides for special cases (image backgrounds stay white)
+- Covers all pages: Header, Footer, ProductCard, Cart, Wishlist, Checkout, Profile, Auth, OrderHistory, ProductDetail, Success, 404
+
+---
+
 ## 🎨 UI / UX
 
-- Built with TailwindCSS
+- Built with Tailwind CSS v4
 - Fully responsive (mobile hamburger menu, adaptive layouts)
+- Dark mode support across all components
 - Sticky navbar with click-based user dropdown
 - Animated icons (hover & active states)
 - Clean product card layout with wishlist heart icon
 - Loading spinner animation
 - Gradient buttons and avatars
 - Lucide React icons throughout
+- Toast notifications for user feedback
+- Fixed pagination positioning
 
 ---
 
@@ -126,6 +178,7 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ## 📂 Project Structure
 
+
 src/
 ├─ app/
 │  └─ App.jsx
@@ -144,6 +197,7 @@ src/
 │  ├─ CheckoutPage.jsx
 │  ├─ Home.jsx
 │  ├─ Login.jsx
+│  ├─ NotFoundPage.jsx
 │  ├─ OrderHistoryPage.jsx
 │  ├─ ProductDetail.jsx
 │  ├─ ProductPages.jsx
@@ -166,6 +220,7 @@ src/
 ├─ main.jsx
 └─ index.css
 ```
+
 ---
 
 ## 🛠 Technologies Used
@@ -174,8 +229,9 @@ src/
 - React Router v6
 - Firebase Authentication
 - Cloud Firestore
-- TailwindCSS
+- Tailwind CSS v4
 - Lucide React Icons
+- react-hot-toast
 - Vite
 
 ---
@@ -193,14 +249,20 @@ src/
 - Responsive design with breakpoint-based classes
 - Component-based structure
 - Async/await error handling
+- Array manipulation (`sort`, `slice`, `Array.from`)
+- Dark mode with Tailwind CSS v4 (`@custom-variant`, global CSS overrides)
+- `localStorage` for persisting user preferences
+- Client-side pagination logic
+- CSS layout techniques (`flex-col` + `mt-auto` for fixed positioning)
 
 ---
 
 ## 📈 Planned Improvements
 
 - Persist cart & wishlist with localStorage or Firestore
-- Toast notifications (react-hot-toast)
 - Payment integration (Stripe / iyzico)
-- 404 page
-- Dark mode
-- Performance optimization (React.memo)
+- Performance optimization (React.memo, lazy loading)
+- Product reviews & ratings
+- User address management
+- Order detail page
+- Skeleton loading states

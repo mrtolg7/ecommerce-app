@@ -26,16 +26,16 @@ export default function OrderHistoryPage() {
     )
 
     if (orders.length === 0) return (
-        <div className="flex items-center justify-center bg-white rounded-3xl shadow-2xl border border-gray-100 max-w-4xl mx-4 sm:mx-auto my-10 p-8">
-            <h1 className="font-bold text-indigo-950 text-2xl sm:text-4xl text-center">Henüz siparişiniz yok!</h1>
+        <div className="flex items-center justify-center bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 max-w-4xl mx-4 sm:mx-auto my-10 p-8">
+            <h1 className="font-bold text-indigo-950 dark:text-white text-2xl sm:text-4xl text-center">Henüz siparişiniz yok!</h1>
         </div>
     )
 
     return (
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-4 sm:mx-auto my-10">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 max-w-4xl mx-4 sm:mx-auto my-10">
             <div className="p-4 sm:p-8">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Sipariş Geçmişim</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">Sipariş Geçmişim</h2>
                     <span className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold">
                         {orders.length} Sipariş
                     </span>
@@ -43,7 +43,7 @@ export default function OrderHistoryPage() {
 
                 <div className="space-y-6">
                     {orders.map((order) => (
-                        <div key={order.id} className="border border-gray-100 rounded-2xl p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                        <div key={order.id} className="border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                             {/* Sipariş Başlığı */}
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
                                 <div>
@@ -56,7 +56,7 @@ export default function OrderHistoryPage() {
                                     <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold">
                                         {order.status}
                                     </span>
-                                    <span className="text-lg sm:text-xl font-bold text-gray-900">${order.total?.toFixed(2)}</span>
+                                    <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${order.total?.toFixed(2)}</span>
                                 </div>
                             </div>
 
@@ -64,14 +64,14 @@ export default function OrderHistoryPage() {
                             <div className="space-y-3">
                                 {order.items?.map((item, index) => (
                                     <div key={index} className="flex items-center gap-3 sm:gap-4">
-                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-lg flex-shrink-0 p-1">
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-lg flex-shrink-0 p-1">
                                             <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-medium text-gray-800 text-sm line-clamp-1">{item.title}</p>
+                                            <p className="font-medium text-gray-800 dark:text-white text-sm line-clamp-1">{item.title}</p>
                                             <p className="text-gray-400 text-xs">x{item.quantity} · ${item.price}</p>
                                         </div>
-                                        <p className="text-sm font-semibold text-gray-700">
+                                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                                             ${(item.price * item.quantity).toFixed(2)}
                                         </p>
                                     </div>

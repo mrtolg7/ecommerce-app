@@ -16,6 +16,7 @@ import SearchPage from "../pages/SearchPage";
 import ProfilePage from "../pages/ProfilePage";
 import OrderHistoryPage from "../pages/OrderHistoryPage";
 import SuccessPage from "../pages/successPage"
+import NotFoundPage from "../pages/NotFoundPage"
 
 export default function App() {
 
@@ -37,6 +38,7 @@ export default function App() {
                         <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                         <Route path="order-history" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
                         <Route path="success" element={<ProtectedRoute><SuccessPage /></ProtectedRoute>} />
+                        <Route path="*" element={<NotFoundPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

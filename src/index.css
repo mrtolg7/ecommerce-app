@@ -1,6 +1,105 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-.checkoutForm > input {
+/* Global Dark Mode Base Styles */
+@layer base {
+    body {
+        transition-property: color, background-color, border-color;
+        transition-duration: 200ms;
+    }
+
+    .dark body,
+    .dark {
+        color-scheme: dark;
+    }
+
+    /* All inputs get dark styling automatically */
+    .dark input,
+    .dark textarea,
+    .dark select {
+        background-color: rgb(55, 65, 81);
+        /* gray-700 */
+        border-color: rgb(75, 85, 99);
+        /* gray-600 */
+        color: white;
+    }
+
+    .dark input::placeholder,
+    .dark textarea::placeholder {
+        color: rgb(156, 163, 175);
+        /* gray-400 */
+    }
+
+    /* Secondary text in dark mode */
+    .dark .text-gray-500 {
+        color: rgb(156, 163, 175);
+        /* gray-400 */
+    }
+
+    .dark .text-gray-600 {
+        color: rgb(209, 213, 219);
+        /* gray-300 */
+    }
+
+    .dark .text-gray-900 {
+        color: rgb(255, 255, 255);
+        /* white */
+    }
+
+    .dark .text-gray-800 {
+        color: rgb(243, 244, 246);
+        /* gray-100 */
+    }
+
+    .dark .text-gray-700 {
+        color: rgb(209, 213, 219);
+        /* gray-300 */
+    }
+
+    /* Borders */
+    .dark .border-gray-100 {
+        border-color: rgb(55, 65, 81);
+        /* gray-700 */
+    }
+
+    .dark .border-gray-200 {
+        border-color: rgb(55, 65, 81);
+        /* gray-700 */
+    }
+
+    .dark .border-gray-300 {
+        border-color: rgb(75, 85, 99);
+        /* gray-600 */
+    }
+
+    /* Background overrides */
+    .dark .bg-gray-50 {
+        background-color: rgb(31, 41, 55);
+        /* gray-800 */
+    }
+
+    .dark .bg-gray-100 {
+        background-color: rgb(55, 65, 81);
+        /* gray-700 */
+    }
+
+    .dark .hover\:bg-gray-50:hover {
+        background-color: rgb(55, 65, 81);
+        /* gray-700 */
+    }
+
+    .dark .hover\:bg-gray-100:hover {
+        background-color: rgb(55, 65, 81);
+        /* gray-700 */
+    }
+
+    .dark .hover\:bg-gray-200:hover {
+        background-color: rgb(75, 85, 99);
+        /* gray-600 */
+    }
+}
+
+.checkoutForm>input {
     width: 20rem;
     height: 2rem;
     padding: .5em;

@@ -71,35 +71,35 @@ export default function ProfilePage() {
         <div className="max-w-3xl mx-auto px-4 py-10 space-y-8">
 
             {/* Profile Header */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm p-8">
                 <div className="flex items-center gap-6">
                     <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg shadow-indigo-200">
                         {avatarLetter}
                     </div>
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-800">
+                        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
                             {currentUser.displayName || "No name set"}
                         </h1>
-                        <p className="text-gray-500">{currentUser.email}</p>
+                        <p className="text-gray-500 dark:text-gray-400">{currentUser.email}</p>
                     </div>
                 </div>
             </div>
 
             {/* Account Info */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-                <h2 className="text-lg font-semibold text-gray-800 mb-5 flex items-center gap-2">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm p-8">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-5 flex items-center gap-2">
                     <User size={20} />
                     Account Information
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <Mail size={18} className="text-indigo-500" />
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-wider">Email</p>
                             <p className="text-sm font-medium text-gray-800 truncate">{currentUser.email}</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <Shield size={18} className={currentUser.emailVerified ? "text-green-500" : "text-red-400"} />
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-wider">Email Verified</p>
@@ -108,20 +108,20 @@ export default function ProfilePage() {
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <Calendar size={18} className="text-indigo-500" />
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-wider">Member Since</p>
-                            <p className="text-sm font-medium text-gray-800">
+                            <p className="text-sm font-medium text-gray-800 dark:text-white">
                                 {new Date(currentUser.metadata.creationTime).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <Calendar size={18} className="text-indigo-500" />
                         <div>
                             <p className="text-xs text-gray-400 uppercase tracking-wider">Last Login</p>
-                            <p className="text-sm font-medium text-gray-800">
+                            <p className="text-sm font-medium text-gray-800 dark:text-white">
                                 {new Date(currentUser.metadata.lastSignInTime).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}
                             </p>
                         </div>
@@ -141,7 +141,7 @@ export default function ProfilePage() {
                         value={newName}
                         placeholder={currentUser.displayName || "Enter your name"}
                         onChange={(e) => setNewName(e.target.value)}
-                        className="flex-1 border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                        className="flex-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
                     />
                     <button
                         type="submit"
@@ -163,14 +163,14 @@ export default function ProfilePage() {
                 </h2>
                 <form onSubmit={handlePasswordChange} className="space-y-4">
                     <div>
-                        <label className="block text-sm text-gray-500 mb-1">Current Password</label>
+                        <label className="block text-sm text-gray-500 dark:text-gray-400 mb-1">Current Password</label>
                         <input
                             type="password"
                             value={currentPassword}
                             placeholder="Enter current password"
                             onChange={(e) => setCurrentPassword(e.target.value)}
                             required
-                            className="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                            className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
                         />
                     </div>
                     <div>
@@ -181,7 +181,7 @@ export default function ProfilePage() {
                             placeholder="Enter new password"
                             onChange={(e) => setNewPassword(e.target.value)}
                             required
-                            className="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                            className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
                         />
                     </div>
                     <div>
@@ -192,7 +192,7 @@ export default function ProfilePage() {
                             placeholder="Confirm new password"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
-                            className="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+                            className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition"
                         />
                     </div>
                     <button

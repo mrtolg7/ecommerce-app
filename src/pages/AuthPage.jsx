@@ -8,7 +8,7 @@ const AuthPage = () => {
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState(false);
-  const [name,setName] = useState("")
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,7 @@ const AuthPage = () => {
         await login(email, password);
       } else {
         const userCredential = await register(email, password)
-        await updateProfile(userCredential.user, {displayName: name})
+        await updateProfile(userCredential.user, { displayName: name })
       }
 
       navigate("/");
@@ -30,11 +30,11 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-center bg-gray-50">
+    <div className="w-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
 
-      <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
+      <div className="bg-white dark:bg-gray-800 w-full max-w-md p-8 rounded-2xl shadow-xl">
 
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
           {isLogin ? "Welcome Back" : "Create Account"}
         </h2>
 

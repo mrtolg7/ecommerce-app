@@ -8,12 +8,14 @@ function ProductPages() {
     const { products, isLoading } = getProductsObj()
     const [selectedCategory, setSelectedCategory] = useState("all")
     const [maxPrice, setMaxPrice] = useState(1000)
-
-    // Dinamik kategori listesi
+    const [sortBy, setSortBy] = useState("default")
+    const [currentPage, setCurrentPage] = useState(1)
+    const productPerPage = 6
     const categories = useMemo(() => {
         const cats = [...new Set(products.map(p => p.category))]
         return ["all", ...cats]
     }, [products])
+
 
     // Kategori etiketleri
     const categoryLabels = {
@@ -22,6 +24,14 @@ function ProductPages() {
         "jewelery": "Jewelery",
         "men's clothing": "Men",
         "women's clothing": "Women"
+    }
+
+    const sortOptions = {
+        "default": "Default",
+        "price-asc": "Price: Low to High",
+        "price-desc": "Price: High to Low",
+        "rating-asc": "Rating: Low to High",
+        "rating-desc": "Rating: High to Low",
     }
 
     if (isLoading) {
@@ -41,6 +51,27 @@ function ProductPages() {
         return categoryMatch && priceMatch;
     });
 
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+        switch (sortBy) {
+            case "price-asc":
+                return a.price - b.price;
+            case "price-desc":
+                return b.price - a.price;
+            case "rating-asc":
+                return a.rating.rate - b.rating.rate;
+            case "rating-desc":
+                return b.rating.rate - a.rating.rate;
+            default:
+                return 0;
+        }
+    });
+
+    const startIndex = (currentPage - 1) * productPerPage
+    const endIndex = startIndex + productPerPage
+    const paginatedProducts = sortedProducts.slice(startIndex, endIndex)
+
+    const totalPages = Math.ceil(sortedProducts.length / productPerPage)
+
     const hasActiveFilters = selectedCategory !== "all" || maxPrice < 1000;
 
     const clearAllFilters = () => {
@@ -53,9 +84,9 @@ function ProductPages() {
 
             {/* Page Header */}
             <div className="flex items-center justify-between mb-8">
-                <h1 className="text-3xl font-bold text-gray-800">Products</h1>
+                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Products</h1>
                 <p className="text-sm text-gray-500">
-                    Showing <span className="font-semibold text-indigo-600">{filteredProducts.length}</span> of {products.length} products
+                    Showing <span className="font-semibold text-indigo-600">{sortedProducts.length}</span> of {products.length} products
                 </p>
             </div>
 
@@ -96,10 +127,27 @@ function ProductPages() {
                 {/* Sidebar */}
                 <aside className="w-64 shrink-0 hidden md:block">
                     <div className="sticky top-24 space-y-8">
-
+                        {/* Sort */}
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+                            <h3 className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                                <SlidersHorizontal size={16} />
+                                Sort By
+                            </h3>
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none"
+                            >
+                                {Object.entries(sortOptions).map(([key, value]) => (
+                                    <option key={key} value={key}>
+                                        {value}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                         {/* Categories */}
-                        <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                            <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+                            <h3 className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
                                 <SlidersHorizontal size={16} />
                                 Categories
                             </h3>
@@ -111,7 +159,7 @@ function ProductPages() {
                                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 text-left
                                             ${selectedCategory === cat
                                                 ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
-                                                : "bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600"
+                                                : "bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-gray-600 hover:text-indigo-600"
                                             }`}
                                     >
                                         {categoryLabels[cat] || cat}
@@ -121,8 +169,8 @@ function ProductPages() {
                         </div>
 
                         {/* Price Filter */}
-                        <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                            <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-4">
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 shadow-sm">
+                            <h3 className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-wider mb-4">
                                 Price Range
                             </h3>
                             <div className="space-y-3">
@@ -146,23 +194,58 @@ function ProductPages() {
                 </aside>
 
                 {/* Products Grid */}
-                <div className="flex-1">
-                    {filteredProducts.length > 0 ? (
+                <div className="flex-1 flex flex-col min-h-[800px]">
+                    {paginatedProducts.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {filteredProducts.map((product) => (
+                            {paginatedProducts.map((product) => (
                                 <ProductCard key={product.id} product={product} />
                             ))}
                         </div>
+
                     ) : (
                         <div className="flex flex-col items-center justify-center py-20 text-center">
                             <ShoppingBag size={64} className="text-gray-300 mb-4" />
-                            <h2 className="text-xl font-semibold text-gray-700 mb-2">No products found</h2>
+                            <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">No products found</h2>
                             <p className="text-gray-400 mb-6">Try adjusting your filters to find what you're looking for.</p>
                             <button
                                 onClick={clearAllFilters}
                                 className="px-6 py-2.5 bg-indigo-600 text-white rounded-full font-medium hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg"
                             >
                                 Clear All Filters
+                            </button>
+                        </div>
+                    )}
+
+                    {totalPages > 1 && (
+                        <div className="flex justify-center items-center gap-2 mt-auto pt-10">
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                                className="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-indigo-600 hover:text-white transition-all duration-200"
+                            >
+                                ← Prev
+                            </button>
+
+                            {/* Sayfa numaraları */}
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${currentPage === page
+                                        ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
+                                        : "bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-gray-600 hover:text-indigo-600"
+                                        }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+
+                            <button
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                                className="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-indigo-600 hover:text-white transition-all duration-200"
+                            >
+                                Next →
                             </button>
                         </div>
                     )}

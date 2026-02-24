@@ -9,7 +9,7 @@ import { collection, addDoc } from "firebase/firestore";
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
- const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const cartItems = Object.values(cart);
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -35,8 +35,8 @@ export default function CheckoutPage() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto my-10 bg-white rounded-3xl shadow-2xl p-10 text-center">
-        <h2 className="text-2xl font-bold text-indigo-950">
+      <div className="max-w-4xl mx-auto my-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-10 text-center">
+        <h2 className="text-2xl font-bold text-indigo-950 dark:text-white">
           Sepetiniz boş!
         </h2>
       </div>
@@ -67,25 +67,25 @@ export default function CheckoutPage() {
 
     setError("");
     setLoading(true);
-    await addDoc(collection(db, "orders"),{
-        userId: currentUser.uid,
-        items: cartItems,
-        total: total,
-        date: new Date().toISOString(),
-        status: "completed",
-        shippingAddress: form,
-      })
-      clearCart();
-      navigate("/success");
+    await addDoc(collection(db, "orders"), {
+      userId: currentUser.uid,
+      items: cartItems,
+      total: total,
+      date: new Date().toISOString(),
+      status: "completed",
+      shippingAddress: form,
+    })
+    clearCart();
+    navigate("/success");
 
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-10 bg-white rounded-3xl shadow-2xl border border-gray-100 p-10">
+    <div className="max-w-6xl mx-auto my-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 p-10">
       <div className="grid md:grid-cols-2 gap-10">
         {/* LEFT - FORM */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <h2 className="text-3xl font-bold text-gray-800">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
             Checkout
           </h2>
 
@@ -94,13 +94,13 @@ export default function CheckoutPage() {
             <input
               name="name"
               placeholder="Full Name"
-              className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+              className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
               onChange={handleChange}
             />
             <input
               name="email"
               placeholder="Email"
-              className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+              className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
               onChange={handleChange}
             />
           </div>
@@ -110,47 +110,47 @@ export default function CheckoutPage() {
             <input
               name="address"
               placeholder="Address"
-              className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+              className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
               onChange={handleChange}
             />
             <div className="grid grid-cols-2 gap-4">
               <input
                 name="city"
                 placeholder="City"
-                className="p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
                 onChange={handleChange}
               />
               <input
                 name="postal"
                 placeholder="Postal Code"
-                className="p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
                 onChange={handleChange}
               />
             </div>
           </div>
 
           {/* Payment */}
-          <div className="bg-gray-50 p-6 rounded-2xl space-y-4">
-            <h3 className="font-semibold text-gray-700">
+          <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl space-y-4">
+            <h3 className="font-semibold text-gray-700 dark:text-white">
               Payment Details
             </h3>
             <input
               name="cardNumber"
               placeholder="Card Number"
-              className="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+              className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
               onChange={handleChange}
             />
             <div className="grid grid-cols-2 gap-4">
               <input
                 name="expiry"
                 placeholder="MM/YY"
-                className="p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
                 onChange={handleChange}
               />
               <input
                 name="cvv"
                 placeholder="CVV"
-                className="p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-indigo-500"
+                className="p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:border-indigo-500"
                 onChange={handleChange}
               />
             </div>
@@ -170,8 +170,8 @@ export default function CheckoutPage() {
         </form>
 
         {/* RIGHT - SUMMARY */}
-        <div className="bg-gray-50 p-6 rounded-2xl h-fit space-y-6">
-          <h3 className="text-xl font-bold text-gray-800">
+        <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-2xl h-fit space-y-6">
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white">
             Order Summary
           </h3>
 
