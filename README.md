@@ -175,9 +175,9 @@ Modern e-commerce frontend project built with React & Firebase.
 - Immutable state updates (object-based state)
 
 ---
-```
-## 📂 Project Structure
 
+## 📂 Project Structure
+```
 
 src/
 ├─ app/
