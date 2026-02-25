@@ -212,9 +212,9 @@ Modern e-commerce frontend project built with React & Firebase.
 - `React.memo` for component memoization
 
 ---
-```
-## 📂 Project Structure
 
+## 📂 Project Structure
+```
 
 src/
 ├─ app/
