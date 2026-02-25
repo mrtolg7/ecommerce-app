@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function Cart() {
-  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart(); // removeFromCart'ı da çekiyoruz
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
   const items = Object.values(cart);
   console.log(cart)
   const { currentUser } = useAuth()
@@ -23,41 +23,41 @@ export default function Cart() {
   };
 
 
-  if (items.length === 0) return (<div className=" flex items-center justify-center bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 p-8 dark:bg-gray-800 dark:border-gray-700 dark:text-white"><h1 className="font-bold text-indigo-950 text-4xl dark:text-white">Sepete ürün ekleyiniz!</h1></div>); // Sepet boşsa hiç gözükmesin
+  if (items.length === 0) return (<div className=" flex items-center justify-center bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 p-8 dark:bg-gray-800 dark:border-gray-700 dark:text-white"><h1 className="font-bold text-indigo-950 text-4xl dark:text-white">Your cart is empty!</h1></div>);
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 max-w-4xl mx-auto my-10 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
       <div className="p-8">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Alışveriş Sepetim</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">My Cart</h2>
           <span className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold">
-            {items.length} Farklı Ürün
+            {items.length} Items
           </span>
         </div>
 
         <div className="space-y-6">
           {items.map((item) => (
             <div key={item.id} className="flex sm:flex-row flex-col items-center gap-6 p-4 rounded-2xl hover:bg-gray-50 transition-colors group dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
-              {/* Ürün Resmi */}
+              {/* Product Image */}
               <div className="w-full sm:w-24 h-32 sm:h-24 bg-white rounded-xl flex-shrink-0 p-2">
                 <img src={item.image} alt={item.title} className="w-full h-full object-contain mix-blend-multiply" />
               </div>
 
-              {/* Ürün Detayları */}
+              {/* Product Details */}
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-800 text-lg line-clamp-1 dark:text-white">{item.title}</h3>
-                <p className="text-gray-500 text-sm mt-1">Birim Fiyat: ${item.price}</p>
+                <p className="text-gray-500 text-sm mt-1">Unit Price: ${item.price}</p>
 
-                {/* Adet Kontrolü - Şimdilik sadece gösteriyoruz */}
+                {/* Quantity Control */}
                 <div className="flex items-center gap-3 mt-3">
-                  <span className="text-sm font-medium text-gray-600 dark:text-white">Adet:</span>
+                  <span className="text-sm font-medium text-gray-600 dark:text-white">Qty:</span>
                   <div className="flex items-center bg-gray-100 rounded-lg px-3 py-1 font-bold text-indigo-600">
                     {item.quantity}
                   </div>
                 </div>
               </div>
 
-              {/* Fiyat ve Silme */}
+              {/* Price & Remove */}
               <div className="text-right flex items-center gap-3 w-full sm:W-auto flex-row sm:flex-col justify-between sm:items-end ">
                 <span className="text-xl font-bold text-gray-900">
                   ${(item.price * item.quantity).toFixed(2)}
@@ -74,7 +74,7 @@ export default function Cart() {
                 <button
                   onClick={() => removeFromCart(item.id)}
                   className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-all opacity-0 group-hover:opacity-100 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
-                  title="Ürünü Kaldır"
+                  title="Remove Item"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
@@ -85,15 +85,15 @@ export default function Cart() {
           ))}
         </div>
 
-        {/* Alt Toplam ve Ödeme Alanı */}
+        {/* Subtotal & Checkout */}
         <div className="mt-10 pt-8 border-t border-gray-100">
           <div className="flex justify-between items-end flex-col sm:flex-row gap-4">
             <div>
-              <p className="text-gray-500 text-sm dark:text-white">Toplam Tutar</p>
+              <p className="text-gray-500 text-sm dark:text-white">Total</p>
               <p className="text-4xl font-extrabold text-gray-900">${totalPrice.toFixed(2)}</p>
             </div>
             <button type="button" onClick={handleCheckout} className="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg shadow-indigo-200 active:scale-95">
-              Ödemeye Geç
+              Proceed to Checkout
             </button>
 
           </div>

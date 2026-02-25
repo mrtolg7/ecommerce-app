@@ -20,17 +20,17 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     const register = (email, password) => {
-        toast.success("Kayıt olundu!")
+        toast.success("Registered successfully!")
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const login = (email, password) => {
-        toast.success("Giriş yapıldı!")
+        toast.success("Logged in successfully!")
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logout = () => {
-        toast.success("Çıkış yapıldı!")
+        toast.success("Logged out successfully!")
         return signOut(auth)
     }
 

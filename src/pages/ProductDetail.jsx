@@ -2,15 +2,18 @@ import { useParams } from "react-router-dom";
 import { getProductsObj } from "../context/ProductContext";
 import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ReviewForm from "../components/ReviewForm";
+import ReviewList from "../components/ReviewList";
+import { getReviewsByProduct } from "../services/reviewService";
 
 
 const ProductDetail = () => {
   const { id } = useParams()
   const { products, isLoading } = getProductsObj()
+  const [reviews, setReviews] = useState([])
   const selectedProduct = products.find(p => p.id === Number(id))
 
-  console.log(selectedProduct)
   const { addToCart, increaseQuantity } = useCart()
   const [quantity, setQuantity] = useState(1)
   const decreaseBtn = document.getElementById("decreaseBtn")
@@ -18,6 +21,15 @@ const ProductDetail = () => {
   if (isLoading || !selectedProduct) {
     return <h1>Loading...</h1>
   }
+
+  const fetchReviews = async () => {
+    const data = await getReviewsByProduct(Number(id))
+    setReviews(data)
+  }
+
+  useEffect(() => {
+    if (id) fetchReviews()
+  }, [id])
 
   const increasedQuantity = () => {
     setQuantity(prev => prev + 1)
@@ -112,6 +124,13 @@ const ProductDetail = () => {
             <p>✔ Secure payment</p>
           </div>
 
+        </div>
+      </div>
+      <div className="mt-12 border-t dark:border-gray-700 pt-8">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Customer Reviews</h2>
+        <ReviewForm productId={id} onReviewSubmit={fetchReviews} />
+        <div className="mt-8">
+          <ReviewList reviews={reviews} />
         </div>
       </div>
     </div>

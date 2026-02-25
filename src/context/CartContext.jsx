@@ -1,11 +1,18 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart")
+    return saved ? JSON.parse(saved) : {}
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
 
   const addToCart = (product, quantity = 1) => {
     // 🔒 Güvenlik kontrolü
@@ -26,7 +33,7 @@ export const CartProvider = ({ children }) => {
           },
         };
       }
-      
+
       // 🎯 Cart item formatını biz belirliyoruz
       return {
         ...prevCart,
@@ -39,7 +46,7 @@ export const CartProvider = ({ children }) => {
         },
       };
     });
-    toast.success("Ürün sepete eklendi!");
+    toast.success("Product added to cart!");
   };
 
   const removeFromCart = (productId) => {
@@ -50,7 +57,7 @@ export const CartProvider = ({ children }) => {
       delete newCart[id];
       return newCart;
     });
-    toast.success("Ürün sepetten kaldırıldı!");
+    toast.success("Product removed from cart!");
   };
 
   const increaseQuantity = (id) => {
@@ -80,7 +87,7 @@ export const CartProvider = ({ children }) => {
       if (!existingItem) return prevCart
 
       if (existingItem) {
-        if(existingItem.quantity === 1) {
+        if (existingItem.quantity === 1) {
           removeFromCart(id)
           return prevCart
         }
@@ -110,7 +117,6 @@ export const CartProvider = ({ children }) => {
     clearCart
   };
 
-  console.log("🛒 Sepet Güncellendi:", cart);
 
   return (
     <CartContext.Provider value={values}>

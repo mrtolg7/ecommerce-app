@@ -92,6 +92,17 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ---
 
+### 💾 Data Persistence
+
+- Cart persisted via `localStorage` (survives page refresh)
+- Wishlist persisted via `localStorage`
+- Lazy initializer pattern (`useState(() => ...)`) for efficient loading
+- `useEffect` sync on every state change
+- `clearCart` / `clearWishlist` automatically clears localStorage via effect
+- Wishlist requires login — unauthenticated users see a toast warning
+
+---
+
 ### 💳 Checkout
 
 - Checkout page with order form & summary (protected route)
@@ -113,6 +124,18 @@ Modern e-commerce frontend project built with React & Firebase.
 
 - Order confirmation page after successful checkout
 - Links to Order History and continue shopping
+
+---
+
+### ⭐ Product Reviews & Ratings
+
+- Users can rate products (1-5 stars) with interactive star selector
+- Hover preview on star rating
+- Comment form with validation
+- Reviews stored in Firestore `reviews` collection
+- Reviews fetched per product with `where` + `orderBy` (composite index)
+- Login required to submit a review
+- Review list with star display and username
 
 ---
 
@@ -145,6 +168,16 @@ Modern e-commerce frontend project built with React & Firebase.
 
 ---
 
+### 🚀 Performance Optimization
+
+- `React.lazy` + `Suspense` for route-based code splitting
+- Lazy-loaded pages: ProductDetail, AuthPage, WishlistPage, CheckoutPage, ProfilePage, OrderHistoryPage, SearchPage, SuccessPage, NotFoundPage
+- `React.memo` on ProductCard to prevent unnecessary re-renders
+- Removed unnecessary `console.log` statements from production code
+- Spinner fallback during lazy load
+
+---
+
 ## 🎨 UI / UX
 
 - Built with Tailwind CSS v4
@@ -158,6 +191,7 @@ Modern e-commerce frontend project built with React & Firebase.
 - Lucide React icons throughout
 - Toast notifications for user feedback
 - Fixed pagination positioning
+
 
 ---
 
@@ -173,6 +207,9 @@ Modern e-commerce frontend project built with React & Firebase.
 - Firebase Authentication (`signIn`, `signOut`, `updateProfile`, `updatePassword`, `reauthenticateWithCredential`)
 - Cloud Firestore (`addDoc`, `getDocs`, `query`, `where`, `collection`)
 - Immutable state updates (object-based state)
+- `localStorage` persistence for cart & wishlist
+- `React.lazy` + `Suspense` for code splitting
+- `React.memo` for component memoization
 
 ---
 ```
@@ -188,7 +225,9 @@ src/
 │  ├─ Footer.jsx
 │  ├─ Header.jsx
 │  ├─ Layout.jsx
-│  └─ ProductCard.jsx
+│  ├─ ProductCard.jsx
+│  ├─ ReviewForm.jsx
+│  └─ ReviewList.jsx
 │
 ├─ pages/
 │  ├─ About.jsx
@@ -214,7 +253,8 @@ src/
 │  └─ ProtectedRoute.jsx
 │
 ├─ services/
-│  └─ firebase.jsx
+│  ├─ firebase.jsx
+│  └─ reviewService.jsx
 ├─ hooks/
 ├─ types/
 ├─ main.jsx
@@ -250,18 +290,19 @@ src/
 - Async/await error handling
 - Array manipulation (`sort`, `slice`, `Array.from`)
 - Dark mode with Tailwind CSS v4 (`@custom-variant`, global CSS overrides)
-- `localStorage` for persisting user preferences
+- `localStorage` for persisting user preferences, cart & wishlist
 - Client-side pagination logic
 - CSS layout techniques (`flex-col` + `mt-auto` for fixed positioning)
+- Route-based code splitting with `React.lazy` + `Suspense`
+- Component memoization with `React.memo`
+- Firestore composite indexes for compound queries
 
 ---
 
 ## 📈 Planned Improvements
 
-- Persist cart & wishlist with localStorage or Firestore
 - Payment integration (Stripe / iyzico)
-- Performance optimization (React.memo, lazy loading)
-- Product reviews & ratings
 - User address management
 - Order detail page
 - Skeleton loading states
+- Admin dashboard

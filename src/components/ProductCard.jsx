@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { Heart } from "lucide-react";
-export default function ProductCard({ product }) {
+import {memo} from "react";
+
+const ProductCard = memo(({product}) => {
   const { addToCart } = useCart();
   const { wishlist, toggleWishlist } = useWishlist()
   const isInWishlist = wishlist[product.id]
+  
 
   return (
     // 1. DOKUNUŞ: h-full ve flex flex-col ekledik.
@@ -59,4 +62,6 @@ export default function ProductCard({ product }) {
     </div>
   );
 
-}
+})
+
+export default ProductCard;

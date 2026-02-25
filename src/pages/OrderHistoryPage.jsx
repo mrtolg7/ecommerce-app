@@ -27,7 +27,7 @@ export default function OrderHistoryPage() {
 
     if (orders.length === 0) return (
         <div className="flex items-center justify-center bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 max-w-4xl mx-4 sm:mx-auto my-10 p-8">
-            <h1 className="font-bold text-indigo-950 dark:text-white text-2xl sm:text-4xl text-center">Henüz siparişiniz yok!</h1>
+            <h1 className="font-bold text-indigo-950 dark:text-white text-2xl sm:text-4xl text-center">You have no orders yet!</h1>
         </div>
     )
 
@@ -35,21 +35,21 @@ export default function OrderHistoryPage() {
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 max-w-4xl mx-4 sm:mx-auto my-10">
             <div className="p-4 sm:p-8">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">Sipariş Geçmişim</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">Order History</h2>
                     <span className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold">
-                        {orders.length} Sipariş
+                        {orders.length} Orders
                     </span>
                 </div>
 
                 <div className="space-y-6">
                     {orders.map((order) => (
                         <div key={order.id} className="border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            {/* Sipariş Başlığı */}
+                            {/* Order Header */}
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
                                 <div>
-                                    <p className="text-sm text-gray-400">Sipariş #{order.id.slice(0, 8)}</p>
+                                    <p className="text-sm text-gray-400">Order #{order.id.slice(0, 8)}</p>
                                     <p className="text-sm text-gray-500">
-                                        {new Date(order.date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                                        {new Date(order.date).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -60,7 +60,7 @@ export default function OrderHistoryPage() {
                                 </div>
                             </div>
 
-                            {/* Siparişteki Ürünler */}
+                            {/* Order Items */}
                             <div className="space-y-3">
                                 {order.items?.map((item, index) => (
                                     <div key={index} className="flex items-center gap-3 sm:gap-4">

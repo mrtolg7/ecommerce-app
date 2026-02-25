@@ -4,45 +4,45 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LocateIcon } from "lucide-react";
 
 const Login = () => {
-    const {login} = useAuth()
+    const { login } = useAuth()
 
-    const [email,setEmail] = useState("")
-    const [password,setPassword] = useState("")
-    const [name , setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
     const location = useLocation()
     const navigate = useNavigate()
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await login(email,password)
+            await login(email, password)
             navigate(location.state?.from || "/")
-            alert("Giriş başarılı")
-        } catch(err) {
+            alert("Login successful")
+        } catch (err) {
             alert(err.message)
         }
         console.log(location.state)
     }
 
-        return (
+    return (
         <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            placeholder="Name"
-            onChange={(e) => setName(e.target.value)}
-        />
-        <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-        />
+            <input
+                type="text"
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+            />
+            <input
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+            />
 
-        <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-        />
+            <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+            />
 
-        <button type="submit">Login</button>
+            <button type="submit">Login</button>
         </form>
     );
 };

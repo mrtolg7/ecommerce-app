@@ -1,22 +1,21 @@
-import React, { useEffect } from "react";
+import { lazy , Suspense} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductPages from "../pages/ProductPages";
-import Header from "../components/Header";
-import Cart from "../components/Cart";
 import Home from "../pages/Home";
-import About from "../pages/About";
-import Blog from "../pages/Blog";
 import Layout from "../components/Layout";
-import ProductDetail from "../pages/ProductDetail";
-import AuthPage from "../pages/AuthPage";
-import WishlistPage from "../pages/WishlistPage";
-import CheckoutPage from "../pages/CheckoutPage";
 import ProtectedRoute from "../context/ProtectedRoute";
-import SearchPage from "../pages/SearchPage";
-import ProfilePage from "../pages/ProfilePage";
-import OrderHistoryPage from "../pages/OrderHistoryPage";
-import SuccessPage from "../pages/successPage"
-import NotFoundPage from "../pages/NotFoundPage"
+import Cart from "../components/Cart";
+
+const About = lazy (() => import( "../pages/About"));
+const Blog = lazy (() => import( "../pages/Blog"));
+const ProductDetail = lazy (() => import( "../pages/ProductDetail"));
+const AuthPage = lazy (() => import( "../pages/AuthPage"));
+const WishlistPage = lazy (() => import( "../pages/WishlistPage"));
+const CheckoutPage = lazy (() => import( "../pages/CheckoutPage"));
+const SearchPage = lazy (() => import( "../pages/SearchPage"));
+const ProfilePage = lazy (() => import( "../pages/ProfilePage"));
+const OrderHistoryPage = lazy (() => import( "../pages/OrderHistoryPage"));
+const SuccessPage = lazy (() => import( "../pages/successPage"));
+const NotFoundPage = lazy (() => import( "../pages/NotFoundPage"));
 
 export default function App() {
 
@@ -24,6 +23,7 @@ export default function App() {
     return (
         <>
             <BrowserRouter>
+                <Suspense fallback={<div className="flex items-center justify-center h-screen"><div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-600"></div></div>}>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
@@ -41,6 +41,7 @@ export default function App() {
                         <Route path="*" element={<NotFoundPage />} />
                     </Route>
                 </Routes>
+                </Suspense>
             </BrowserRouter>
         </>
     )

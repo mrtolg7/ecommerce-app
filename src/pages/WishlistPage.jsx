@@ -5,30 +5,30 @@ export default function WishlistPage() {
   const { addToCart } = useCart()
   const wishlistItems = Object.values(wishlist)
 
-  if (wishlistItems.length === 0) return (<div className="flex items-center justify-center bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 max-w-4xl mx-auto my-10 p-8"><h1 className="text-center font-bold text-indigo-950 dark:text-white text-4xl">İstek listeniz boş!</h1></div>);
+  if (wishlistItems.length === 0) return (<div className="flex items-center justify-center bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 max-w-4xl mx-auto my-10 p-8"><h1 className="text-center font-bold text-indigo-950 dark:text-white text-4xl">Your wishlist is empty!</h1></div>);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 max-w-4xl mx-auto my-10">
       <div className="p-8">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">İstek Listem</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">My Wishlist</h2>
           <span className="bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold">
-            {wishlistItems.length} Farklı Ürün
+            {wishlistItems.length} Items
           </span>
         </div>
 
         <div className="space-y-6">
           {wishlistItems.map((wishItems) => (
             <div key={wishItems.id} className="flex items-center gap-6 p-4 flex-col sm:flex-row rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-              {/* Ürün Resmi */}
+              {/* Product Image */}
               <div className="w-full sm:w-24 h-32 sm:h-24 bg-white rounded-xl flex-shrink-0 p-2">
                 <img src={wishItems.image} alt={wishItems.title} className="w-full h-full object-contain mix-blend-multiply" />
               </div>
 
-              {/* Ürün Detayları */}
+              {/* Product Details */}
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-800 dark:text-white text-lg line-clamp-1">{wishItems.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Birim Fiyat: ${wishItems.price}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Unit Price: ${wishItems.price}</p>
               </div>
               <div>
                 <button
@@ -40,7 +40,7 @@ export default function WishlistPage() {
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                   </svg>
-                  Sepete Ekle
+                  Add to Cart
                 </button>
               </div>
             </div>

@@ -37,7 +37,7 @@ export default function CheckoutPage() {
     return (
       <div className="max-w-4xl mx-auto my-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-10 text-center">
         <h2 className="text-2xl font-bold text-indigo-950 dark:text-white">
-          Sepetiniz boş!
+          Your cart is empty!
         </h2>
       </div>
     );
@@ -61,7 +61,7 @@ export default function CheckoutPage() {
       !form.expiry ||
       !form.cvv
     ) {
-      setError("Lütfen tüm alanları doldurun.");
+      setError("Please fill in all fields.");
       return;
     }
 

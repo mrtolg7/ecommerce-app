@@ -1,24 +1,37 @@
-import { useContext, createContext,useEffect,useState } from "react";
+import { useContext, createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 const WishContext = createContext()
+import { useAuth } from "./AuthContext"
 
-export const WishProvider = ({children}) => {
-    const [wishlist, setWishlist] = useState({})
+export const WishProvider = ({ children }) => {
+    const { currentUser } = useAuth()
+    const [wishlist, setWishlist] = useState(() => {
+        const saved = localStorage.getItem("wishlist")
+        return saved ? JSON.parse(saved) : {}
+    })
+
+
+    useEffect(() => {
+        localStorage.setItem("wishlist", JSON.stringify(wishlist))
+    }, [wishlist])
 
     const toggleWishlist = (product) => {
-        if(!product || !product.id)  return
-        
-        
+        if (!product || !product.id) return
+
+        if (!currentUser) {
+            toast.error("Please login first!")
+            return
+        }
         const id = product.id
         const isRemoving = !!wishlist[id]
         setWishlist((prevList) => {
             const existingWish = prevList[id]
-        
-            if(existingWish) {
-                const updated = {...prevList}
+
+            if (existingWish) {
+                const updated = { ...prevList }
                 delete updated[id]
                 return updated
-                
+
             }
 
             return {
@@ -31,10 +44,10 @@ export const WishProvider = ({children}) => {
                 }
             }
         })
-        if(isRemoving) {
-            toast.success("İstek listenizden kaldırıldı!")
+        if (isRemoving) {
+            toast.success("Removed from wishlist!")
         } else {
-            toast.success("İstek listenize eklendi!")
+            toast.success("Added to wishlist!")
         }
     }
 
@@ -44,11 +57,11 @@ export const WishProvider = ({children}) => {
         })
     }
 
-      return (
-    <WishContext.Provider value={{ wishlist, toggleWishlist, clearWishlist }}>
-      {children}
-    </WishContext.Provider>
-  );
+    return (
+        <WishContext.Provider value={{ wishlist, toggleWishlist, clearWishlist }}>
+            {children}
+        </WishContext.Provider>
+    );
 }
 
 export const useWishlist = () => {
